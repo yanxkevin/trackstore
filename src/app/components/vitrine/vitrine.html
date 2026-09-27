@@ -1,0 +1,57 @@
+<!-- VÍDEO DE FUNDO -->
+<div class="video-background">
+  <video autoplay muted loop playsinline>
+    <source src="assets/videos/fundo.mp4" type="video/mp4">
+    Seu navegador não suporta vídeos.
+  </video>
+  <div class="video-overlay"></div>
+</div>
+
+<!-- CONTEÚDO PRINCIPAL -->
+<div class="conteudo-principal">
+  
+  <!-- ========== MENSAGENS ========== -->
+  <div class="container">
+    <div *ngIf="mensagemSucesso" class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+      <i class="fa fa-check-circle"></i> {{ mensagemSucesso }}
+      <button type="button" class="btn-close" (click)="mensagemSucesso = ''"></button>
+    </div>
+
+    <div *ngIf="mensagemErro" class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+      <i class="fa fa-lock"></i> {{ mensagemErro }}
+      <button type="button" class="btn btn-sm btn-outline-danger ms-3" (click)="irParaLogin()">
+        Fazer Login
+      </button>
+      <button type="button" class="btn-close" (click)="mensagemErro = ''"></button>
+    </div>
+  </div>
+
+  <!-- Título -->
+  <div class="text-center mb-5">
+    <h1 class="display-bold text-white" style="text-shadow: 3px 3px 6px rgba(0,0,0,0.9); font-size: 90px;">
+       Explore por Gênero
+    </h1>
+    <p class="display-bold text-white" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.8); font-size: 40px;">
+      Escolha um gênero musical e descubra os melhores álbuns
+    </p>
+  </div>
+
+  <!-- BOTÕES DE GÊNERO -->
+  <div class="generos-container">
+    <div class="genero-item" *ngFor="let genero of generos">
+      <a [routerLink]="['/genero', genero.rota]" class="genero-link">
+        <div class="genero-card" [style.backgroundImage]="'url(' + genero.imagem + ')'">
+          <div class="genero-overlay">
+            <div class="genero-content">
+              <h2 class="genero-nome">{{ genero.nome }}</h2>
+              <p class="genero-descricao">{{ genero.descricao }}</p>
+              <span class="genero-badge">
+                 {{ contarAlbunsPorGenero(genero.nome) }} álbuns
+              </span>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

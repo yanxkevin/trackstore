@@ -1,0 +1,195 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card shadow-lg border-0">
+        <div class="card-header bg-success text-white text-center py-3">
+          <h3 class="mb-0"><i class="fa fa-user-plus"></i> Criar Conta</h3>
+        </div>
+        
+        <div class="card-body p-4">
+          <!-- Mensagens -->
+          <div *ngIf="sucesso" class="alert alert-success">
+            <i class="fa fa-check-circle"></i> {{ sucesso }}
+          </div>
+          <div *ngIf="erroGeral" class="alert alert-danger">
+            <i class="fa fa-exclamation-circle"></i> {{ erroGeral }}
+          </div>
+
+          <!-- Formulário -->
+          <form #cadastroForm="ngForm" (ngSubmit)="criarConta()" autocomplete="off">
+            
+            <!-- Nome -->
+            <div class="mb-3">
+              <label for="nome" class="form-label fw-bold">
+                <i class="fa fa-user"></i> Nome Completo
+              </label>
+              <input 
+                type="text" 
+                class="form-control form-control-lg"
+                [class.is-invalid]="erros['nome']"
+                id="nome"
+                [(ngModel)]="nome"
+                name="nome"
+                placeholder="Digite seu nome completo"
+                autocomplete="off"
+                required
+              >
+              <div class="invalid-feedback" *ngIf="erros['nome']">
+                {{ erros['nome'] }}
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+              <label for="email" class="form-label fw-bold">
+                <i class="fa fa-envelope"></i> E-mail
+              </label>
+              <input 
+                type="email" 
+                class="form-control form-control-lg"
+                [class.is-invalid]="erros['email']"
+                id="email"
+                [(ngModel)]="email"
+                name="email"
+                placeholder="seu@email.com"
+                autocomplete="off"
+                required
+              >
+              <div class="invalid-feedback" *ngIf="erros['email']">
+                {{ erros['email'] }}
+              </div>
+            </div>
+
+            <!-- CPF -->
+            <div class="mb-3">
+              <label for="cpf" class="form-label fw-bold">
+                <i class="fa fa-id-card"></i> CPF
+              </label>
+              <input 
+                type="text" 
+                class="form-control form-control-lg"
+                [class.is-invalid]="erros['cpf']"
+                id="cpf"
+                [(ngModel)]="cpf"
+                name="cpf"
+                placeholder="000.000.000-00"
+                (input)="formatarCPF($event)"
+                maxlength="14"
+                autocomplete="off"
+                required
+              >
+              <div class="invalid-feedback" *ngIf="erros['cpf']">
+                {{ erros['cpf'] }}
+              </div>
+            </div>
+
+            <!-- Telefone -->
+            <div class="mb-3">
+              <label for="telefone" class="form-label fw-bold">
+                <i class="fa fa-phone"></i> Telefone
+              </label>
+              <input 
+                type="text" 
+                class="form-control form-control-lg"
+                [class.is-invalid]="erros['telefone']"
+                id="telefone"
+                [(ngModel)]="telefone"
+                name="telefone"
+                placeholder="(00) 00000-0000"
+                (input)="formatarTelefone($event)"
+                maxlength="15"
+                autocomplete="off"
+                required
+              >
+              <div class="invalid-feedback" *ngIf="erros['telefone']">
+                {{ erros['telefone'] }}
+              </div>
+            </div>
+
+            <!-- Senha -->
+            <div class="mb-3">
+              <label for="senha" class="form-label fw-bold">
+                <i class="fa fa-lock"></i> Senha
+              </label>
+              <input 
+                type="password" 
+                class="form-control form-control-lg"
+                [class.is-invalid]="erros['senha']"
+                id="senha"
+                [(ngModel)]="senha"
+                name="senha"
+                placeholder="Mínimo 8 caracteres"
+                autocomplete="new-password"
+                maxlength="20"
+                required
+              >
+              <div class="invalid-feedback" *ngIf="erros['senha']">
+                {{ erros['senha'] }}
+              </div>
+
+              <!-- REQUISITOS DA SENHA -->
+              <div class="requisitos-senha mt-2">
+                <small class="d-block" [class.text-success]="temMinimo8" [class.text-muted]="!temMinimo8">
+                  <i class="fa" [class.fa-check-circle]="temMinimo8" [class.fa-circle]="!temMinimo8"></i>
+                  Mínimo 8 caracteres
+                </small>
+                <small class="d-block" [class.text-success]="temMaiuscula" [class.text-muted]="!temMaiuscula">
+                  <i class="fa" [class.fa-check-circle]="temMaiuscula" [class.fa-circle]="!temMaiuscula"></i>
+                  Pelo menos 1 letra maiúscula
+                </small>
+                <small class="d-block" [class.text-success]="temMinuscula" [class.text-muted]="!temMinuscula">
+                  <i class="fa" [class.fa-check-circle]="temMinuscula" [class.fa-circle]="!temMinuscula"></i>
+                  Pelo menos 1 letra minúscula
+                </small>
+                <small class="d-block" [class.text-success]="temNumero" [class.text-muted]="!temNumero">
+                  <i class="fa" [class.fa-check-circle]="temNumero" [class.fa-circle]="!temNumero"></i>
+                  Pelo menos 1 número
+                </small>
+                <small class="d-block" [class.text-success]="temEspecial" [class.text-muted]="!temEspecial">
+                  <i class="fa" [class.fa-check-circle]="temEspecial" [class.fa-circle]="!temEspecial"></i>
+                  Pelo menos 1 caractere especial (!@#$%...)
+                </small>
+              </div>
+            </div>
+
+            <!-- Confirmar Senha -->
+            <div class="mb-3">
+              <label for="confirmarSenha" class="form-label fw-bold">
+                <i class="fa fa-check-circle"></i> Confirmar Senha
+              </label>
+              <input 
+                type="password" 
+                class="form-control form-control-lg"
+                [class.is-invalid]="erros['confirmarSenha']"
+                id="confirmarSenha"
+                [(ngModel)]="confirmarSenha"
+                name="confirmarSenha"
+                placeholder="Digite a senha novamente"
+                autocomplete="new-password"
+                required
+              >
+              <div class="invalid-feedback" *ngIf="erros['confirmarSenha']">
+                {{ erros['confirmarSenha'] }}
+              </div>
+            </div>
+
+            <!-- Botão -->
+            <button type="submit" class="btn btn-success btn-lg w-100">
+              <i class="fa fa-user-plus"></i> Criar Conta
+            </button>
+          </form>
+
+          <!-- Link para login -->
+          <div class="text-center mt-4">
+            <p class="mb-0">
+              Já possui uma conta? 
+              <a (click)="irParaLogin()" class="text-success fw-bold text-decoration-none cursor-pointer">
+                Iniciar Sessão
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

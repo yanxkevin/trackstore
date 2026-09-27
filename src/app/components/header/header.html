@@ -1,0 +1,61 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/">
+      🎵 TrackStore
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/" routerLinkActive="active">Vitrine</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/busca" routerLinkActive="active">Buscar</a>
+        </li>
+        <li class="nav-item">
+  <a class="nav-link" routerLink="/cesta" routerLinkActive="active">
+    <i class="fa fa-shopping-cart"></i> Cesta
+    <span 
+      class="badge bg-danger ms-1" 
+      *ngIf="contadorCesta > 0"
+    >
+      {{ contadorCesta }}
+    </span>
+  </a>
+</li>
+      
+      <!-- ÁREA DE LOGIN -->
+      <ul class="navbar-nav">
+        <!-- NÃO LOGADO -->
+        <li class="nav-item dropdown" *ngIf="!usuarioLogado">
+          <a class="nav-link dropdown-toggle" href="#" id="loginDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa fa-user"></i> Login
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
+            <li>
+              <a class="dropdown-item" routerLink="/login">
+                <i class="fa fa-sign-in"></i> Iniciar Sessão
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="/cadastro">
+                <i class="fa fa-user-plus"></i> Criar Conta
+              </a>
+            </li>
+          </ul>
+        </li>
+        <!-- LOGADO -->
+<li class="nav-item dropdown" *ngIf="usuarioLogado">
+  <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <i class="fa fa-user-circle"></i> {{ usuarioLogado.nome }}
+  </a>
+  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+    <li>
+      <a class="dropdown-item text-danger" (click)="fazerLogout()" style="cursor: pointer;">
+        <i class="fa fa-sign-out"></i> Sair
+      </a>
+    </li>
+  </ul>
+</li>

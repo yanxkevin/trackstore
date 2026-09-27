@@ -1,0 +1,43 @@
+/* ========== FUNDO ========== */
+:host {
+  display: block;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+  padding-bottom: 40px;
+}
+
+/* ========== CARDS ========== */
+.card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card-header {
+  border-radius: 12px 12px 0 0 !important;
+}
+
+/* ========== BOTÕES DE QUANTIDADE ========== */
+.btn-outline-secondary {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ========== STICKY ========== */
+.sticky-top {
+  z-index: 100;
+}
+
+/* ========== RESPONSIVO ========== */
+@media (max-width: 768px) {
+  .card-body {
+    padding: 10px;
+  }
+}

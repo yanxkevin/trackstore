@@ -1,0 +1,120 @@
+<div class="container mt-4">
+
+  <!-- ========== MENSAGENS ========== -->
+  <div *ngIf="mensagemSucesso" class="alert alert-success alert-dismissible fade show" role="alert">
+    <i class="fa fa-check-circle"></i> {{ mensagemSucesso }}
+    <button type="button" class="btn-close" (click)="mensagemSucesso = ''"></button>
+  </div>
+
+  <div *ngIf="mensagemErro" class="alert alert-danger alert-dismissible fade show" role="alert">
+    <i class="fa fa-lock"></i> {{ mensagemErro }}
+    <button type="button" class="btn btn-sm btn-outline-danger ms-3" (click)="irParaLogin()">
+      Fazer Login
+    </button>
+    <button type="button" class="btn-close" (click)="mensagemErro = ''"></button>
+  </div>
+
+  <!-- Título -->
+  <div class="text-center mb-4">
+    <h1 class="display-4 text-white" style="text-shadow: 3px 3px 6px rgba(0,0,0,0.8);">
+       Buscar Álbuns
+    </h1>
+    <p class="lead text-white" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.6);">
+      Encontre seus álbuns favoritos por artista, álbum ou gênero
+    </p>
+  </div>
+
+  <!-- Campo de Busca -->
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="busca-container">
+        <div class="input-group input-group-lg">
+          <input
+            type="text"
+            class="form-control form-control-lg busca-input"
+            placeholder="O que você está procurando?"
+            [(ngModel)]="termoBusca"
+            (input)="onDigitar()"
+            (keydown.enter)="onBuscar()"
+            (focus)="onDigitar()"
+            (blur)="fecharSugestoes()"
+            autocomplete="off"
+          >
+          <button
+            *ngIf="termoBusca"
+            class="btn btn-outline-light border-0"
+            (click)="limparBusca()"
+            type="button"
+          >
+            <i class="fa fa-times"></i>
+          </button>
+          <button
+            class="btn btn-primary"
+            (click)="onBuscar()"
+            type="button"
+          >
+            <i class="fa fa-search"></i> Buscar
+          </button>
+        </div>
+
+        <!-- Sugestões -->
+        <div
+          *ngIf="mostrarSugestoes && sugestoes.length > 0"
+          class="sugestoes-container"
+        >
+          <div
+            class="sugestao-item"
+            *ngFor="let sugestao of sugestoes"
+            (mousedown)="selecionarSugestao(sugestao)"
+          >
+            <i class="fa fa-music me-2"></i>
+            {{ sugestao }}
+          </div>
+          <div class="sugestao-footer">
+            <small>Pressione Enter para ver todos os resultados</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Resultados -->
+  <div *ngIf="buscou" class="resultados-container mt-4">
+    <div *ngIf="resultados.length === 0" class="text-center py-5">
+      <i class="fa fa-search fa-3x text-white-50 mb-3"></i>
+      <h3 class="text-white"> Nenhum álbum encontrado</h3>
+      <p class="text-white-50">Tente buscar por outro termo</p>
+    </div>
+
+    <div *ngIf="resultados.length > 0">
+      <div class="row row-cols-3 row-cols-sm-4 row-cols-md-5 row-cols-lg-6 row-cols-xl-8 g-3">
+        <div class="col" *ngFor="let album of resultados">
+          <div class="card h-100 shadow-sm">
+            <img
+              [src]="album.imagem"
+              [alt]="album.nome"
+              class="card-img-top"
+            >
+            <div class="card-body">
+              <h6 class="card-title" title="{{ album.nome }}">{{ album.nome }}</h6>
+              <p class="card-text text-muted">{{ album.artista }}</p>
+              <p class="card-text">
+                <span class="badge" [style.background-color]="getCorGenero(album.genero)">{{ album.genero }}</span>
+                <span class="badge bg-info ms-1">{{ album.ano }}</span>
+              </p>
+              <h6 class="text-success mb-0">R$ {{ album.preco | number:'1.2-2' }}</h6>
+            </div>
+            <div class="card-footer d-flex justify-content-between">
+              <button class="btn btn-outline-primary btn-sm" [routerLink]="['/detalhes', album.id]" title="Detalhes">
+                <i class="fa fa-info-circle"></i>
+              </button>
+              <button class="btn btn-primary btn-sm" (click)="adicionarCesta(album)" title="Comprar">
+                <i class="fa fa-shopping-cart"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

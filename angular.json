@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "song": {
+    "TrackStore": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -19,13 +19,19 @@
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
-            ],
+  "src/assets",
+  {
+    "glob": "**/*",
+    "input": "public"
+  }
+],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/font-awesome/css/font-awesome.min.css",
               "src/styles.css"
+            ],
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
             ]
           },
           "configurations": {
@@ -56,10 +62,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "song:build:production"
+              "buildTarget": "TrackStore:build:production"
             },
             "development": {
-              "buildTarget": "song:build:development"
+              "buildTarget": "TrackStore:build:development"
             }
           },
           "defaultConfiguration": "development"

@@ -1,0 +1,10 @@
+footer {
+  background: rgba(0, 0, 0, 0.85) !important;  /* ← PRETO COM 85% DE OPACIDADE */
+  backdrop-filter: blur(5px);
+  color: #ffffff !important;
+  text-align: center;
+  padding: 15px 0;
+  margin-top: 20px;
+  font-size: 0.85rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}

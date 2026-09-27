@@ -1,0 +1,254 @@
+/* ========== FUNDO ========== */
+:host {
+  display: block;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+  padding-bottom: 40px;
+}
+
+/* ========== CAMPO DE BUSCA ========== */
+.busca-container {
+  position: relative;
+}
+
+.busca-input {
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.2) !important;
+  color: #fff !important;
+  border-radius: 50px 0 0 50px !important;
+  padding: 12px 20px !important;
+}
+
+.busca-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.busca-input:focus {
+  border-color: #667eea !important;
+  box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+  background: rgba(255, 255, 255, 0.15) !important;
+}
+
+.input-group-text {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 2px solid rgba(255, 255, 255, 0.2) !important;
+  border-right: none !important;
+  border-radius: 50px 0 0 50px !important;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.busca-container .btn-primary {
+  border-radius: 0 50px 50px 0 !important;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  padding: 12px 24px;
+}
+
+.busca-container .btn-primary:hover {
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+  transform: scale(1.02);
+}
+
+.sugestoes-container {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: rgba(30, 30, 60, 0.95);
+  backdrop-filter: blur(15px);
+  border-radius: 0 0 20px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: none;
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 1000;
+  margin-top: 2px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.sugestao-item {
+  padding: 12px 20px;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.sugestao-item:hover {
+  background: rgba(102, 126, 234, 0.3);
+  padding-left: 25px;
+}
+
+.sugestao-item i {
+  color: #667eea;
+  width: 20px;
+}
+
+.sugestao-footer {
+  padding: 8px 20px;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.7rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  text-align: center;
+}
+
+/* ========== RESULTADOS ========== */
+.resultados-container {
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========== CARDS MENORES ========== */
+.card {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  border: none;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 130px;          /* ← MESMO TAMANHO DO GÊNERO */
+  margin: 0 auto 15px auto;  /* ← ESPAÇO EMBAIXO */
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Capa do álbum */
+.card-img-top {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+}
+
+/* Corpo do card */
+.card-body {
+  padding: 4px 6px 2px;
+}
+
+.card-title {
+  font-weight: 700;
+  font-size: 0.6rem;
+  color: #1a1a2e;
+  margin-bottom: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-text {
+  font-size: 0.5rem;
+  margin-bottom: 1px;
+}
+
+.card-text .badge {
+  font-size: 0.45rem;
+  padding: 1px 4px;
+}
+
+.text-success {
+  color: #2ecc71 !important;
+  font-weight: bold;
+  font-size: 0.65rem;
+}
+
+/* Rodapé com botões */
+.card-footer {
+  padding: 2px 6px 4px;
+  background: transparent;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.card-footer .btn {
+  font-size: 0.5rem;
+  padding: 1px 5px;
+}
+
+.card-footer .btn i {
+  font-size: 0.5rem;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .card {
+    max-width: 110px;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    max-width: 90px;
+  }
+
+  .card-title {
+    font-size: 0.5rem;
+  }
+
+  .card-text {
+    font-size: 0.45rem;
+  }
+}
+/* ========== RESPONSIVO ========== */
+@media (max-width: 768px) {
+  .busca-input {
+    font-size: 0.9rem !important;
+  }
+
+  .busca-container .btn-primary {
+    padding: 10px 16px;
+    font-size: 0.8rem;
+  }
+
+  .sugestoes-container {
+    max-height: 200px;
+  }
+
+  .card {
+    max-width: 160px;
+    margin: 0 auto;
+  }
+
+  .card-img-top {
+    height: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .busca-input {
+    font-size: 0.8rem !important;
+    padding: 10px 14px !important;
+  }
+
+  .busca-container .btn-primary {
+    padding: 8px 12px;
+    font-size: 0.7rem;
+  }
+
+  .card {
+    max-width: 130px;
+  }
+
+  .card-img-top {
+    height: 80px;
+  }
+
+  .card-title {
+    font-size: 0.65rem;
+  }
+}

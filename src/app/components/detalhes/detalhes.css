@@ -1,0 +1,58 @@
+/* ========== BOTÃO VOLTAR ========== */
+.btn-voltar {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  padding: 10px 24px;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-voltar:hover {
+  background: rgba(0, 0, 0, 0.7);
+  transform: translateX(-5px);
+  color: #fff;
+}
+
+.btn-voltar i {
+  margin-right: 6px;
+}
+
+/* ========== CARD DO ÁLBUM ========== */
+.container {
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+img {
+  max-height: 400px;
+  object-fit: contain;
+}
+
+/* ========== LISTA DE FAIXAS ========== */
+.list-group-item {
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  margin-bottom: 5px;
+  border-radius: 8px !important;
+  transition: all 0.3s ease;
+}
+
+.list-group-item:hover {
+  background: #fff;
+  transform: translateX(5px);
+}

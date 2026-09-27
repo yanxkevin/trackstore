@@ -1,0 +1,183 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+      <div class="card shadow-lg border-0">
+        
+        <!-- ========== CABEÇALHO ========== -->
+        <div class="card-header bg-warning text-white text-center py-3">
+          <h3 class="mb-0">
+            <i class="fa fa-key"></i> Esqueci a Senha
+          </h3>
+        </div>
+        
+        <div class="card-body p-4">
+          
+          <!-- ========== MENSAGENS ========== -->
+          <div *ngIf="erro" class="alert alert-danger">
+            <i class="fa fa-exclamation-circle"></i> {{ erro }}
+          </div>
+          <div *ngIf="sucesso" class="alert alert-success">
+            <i class="fa fa-check-circle"></i> {{ sucesso }}
+          </div>
+
+          <!-- ========== ETAPA 1: DIGITAR E-MAIL ========== -->
+          <div *ngIf="etapa === 1">
+            <p class="text-muted text-center mb-3">
+              Digite seu e-mail cadastrado para receber um código de recuperação.
+            </p>
+
+            <div class="mb-3">
+              <label for="email" class="form-label fw-bold">
+                <i class="fa fa-envelope"></i> E-mail
+              </label>
+              <input 
+                type="email" 
+                class="form-control form-control-lg"
+                id="email"
+                [(ngModel)]="email"
+                name="email"
+                placeholder="seu@email.com"
+                autocomplete="off"
+                required
+              >
+            </div>
+
+            <button (click)="enviarCodigo()" class="btn btn-warning btn-lg w-100 text-white">
+              <i class="fa fa-paper-plane"></i> Enviar Código
+            </button>
+          </div>
+
+          <!-- ========== ETAPA 2: DIGITAR CÓDIGO ========== -->
+          <div *ngIf="etapa === 2">
+            <p class="text-muted text-center mb-3">
+              Enviamos um código de 6 dígitos para <strong>{{ email }}</strong>.
+            </p>
+
+            <div class="mb-3">
+              <label for="codigo" class="form-label fw-bold">
+                <i class="fa fa-shield"></i> Código de Verificação
+              </label>
+              <input 
+                type="text" 
+                class="form-control form-control-lg text-center"
+                id="codigo"
+                [(ngModel)]="codigoDigitado"
+                name="codigo"
+                placeholder="000000"
+                maxlength="6"
+                autocomplete="off"
+                style="font-size: 1.5rem; letter-spacing: 8px;"
+                required
+              >
+            </div>
+
+            <button (click)="verificarCodigo()" class="btn btn-warning btn-lg w-100 text-white mb-2">
+              <i class="fa fa-check"></i> Verificar Código
+            </button>
+
+            <div class="d-flex justify-content-between">
+              <a (click)="reenviarCodigo()" class="text-decoration-none cursor-pointer">
+                <i class="fa fa-refresh"></i> Reenviar código
+              </a>
+              <a (click)="voltarEtapa()" class="text-decoration-none cursor-pointer">
+                <i class="fa fa-arrow-left"></i> Trocar e-mail
+              </a>
+            </div>
+          </div>
+
+          <!-- ========== ETAPA 3: NOVA SENHA ========== -->
+          <div *ngIf="etapa === 3">
+            <p class="text-muted text-center mb-3">
+              Crie uma nova senha segura.
+            </p>
+
+            <!-- Nova Senha -->
+            <div class="mb-3">
+              <label for="novaSenha" class="form-label fw-bold">
+                <i class="fa fa-lock"></i> Nova Senha
+              </label>
+              <input 
+                type="password" 
+                class="form-control form-control-lg"
+                id="novaSenha"
+                [(ngModel)]="novaSenha"
+                name="novaSenha"
+                placeholder="8 a 20 caracteres"
+                autocomplete="new-password"
+                maxlength="20"
+                required
+              >
+
+              <!-- REQUISITOS DA SENHA -->
+              <div class="requisitos-senha mt-2">
+                <small class="d-block" [class.text-success]="temMinimo8" [class.text-muted]="!temMinimo8">
+                  <i class="fa" [class.fa-check-circle]="temMinimo8" [class.fa-circle]="!temMinimo8"></i>
+                  Mínimo 8 caracteres
+                </small>
+                <small class="d-block" [class.text-success]="temMaximo20" [class.text-muted]="!temMaximo20">
+                  <i class="fa" [class.fa-check-circle]="temMaximo20" [class.fa-circle]="!temMaximo20"></i>
+                  Máximo 20 caracteres
+                </small>
+                <small class="d-block" [class.text-success]="temMaiuscula" [class.text-muted]="!temMaiuscula">
+                  <i class="fa" [class.fa-check-circle]="temMaiuscula" [class.fa-circle]="!temMaiuscula"></i>
+                  Pelo menos 1 letra maiúscula
+                </small>
+                <small class="d-block" [class.text-success]="temMinuscula" [class.text-muted]="!temMinuscula">
+                  <i class="fa" [class.fa-check-circle]="temMinuscula" [class.fa-circle]="!temMinuscula"></i>
+                  Pelo menos 1 letra minúscula
+                </small>
+                <small class="d-block" [class.text-success]="temNumero" [class.text-muted]="!temNumero">
+                  <i class="fa" [class.fa-check-circle]="temNumero" [class.fa-circle]="!temNumero"></i>
+                  Pelo menos 1 número
+                </small>
+                <small class="d-block" [class.text-success]="temEspecial" [class.text-muted]="!temEspecial">
+                  <i class="fa" [class.fa-check-circle]="temEspecial" [class.fa-circle]="!temEspecial"></i>
+                  Pelo menos 1 caractere especial (!@#$%...)
+                </small>
+              </div>
+            </div>
+
+            <!-- Confirmar Nova Senha -->
+            <div class="mb-3">
+              <label for="confirmarNovaSenha" class="form-label fw-bold">
+                <i class="fa fa-check-circle"></i> Confirmar Nova Senha
+              </label>
+              <input 
+                type="password" 
+                class="form-control form-control-lg"
+                id="confirmarNovaSenha"
+                [(ngModel)]="confirmarNovaSenha"
+                name="confirmarNovaSenha"
+                placeholder="Digite a senha novamente"
+                autocomplete="new-password"
+                maxlength="20"
+                required
+              >
+            </div>
+
+            <button (click)="redefinirSenha()" class="btn btn-warning btn-lg w-100 text-white mb-2">
+              <i class="fa fa-save"></i> Redefinir Senha
+            </button>
+
+            <div class="text-center">
+              <a (click)="voltarEtapa()" class="text-decoration-none cursor-pointer">
+                <i class="fa fa-arrow-left"></i> Voltar
+              </a>
+            </div>
+          </div>
+
+          <!-- ========== LINK PARA LOGIN ========== -->
+          <div class="text-center mt-4">
+            <p class="mb-0">
+              Lembrou a senha? 
+              <a (click)="irParaLogin()" class="text-warning fw-bold text-decoration-none cursor-pointer">
+                Iniciar Sessão
+              </a>
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

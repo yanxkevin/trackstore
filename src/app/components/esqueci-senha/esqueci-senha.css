@@ -1,0 +1,81 @@
+/* ========== CARD ========== */
+.card {
+  border-radius: 15px;
+  overflow: hidden;
+  animation: fadeInUp 0.5s ease;
+}
+
+.card-header {
+  background: linear-gradient(135deg, #f7971e 0%, #ffd200 100%);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========== INPUTS ========== */
+.form-control:focus {
+  border-color: #f7971e;
+  box-shadow: 0 0 0 0.2rem rgba(247, 151, 30, 0.25);
+}
+
+/* ========== REQUISITOS DA SENHA ========== */
+.requisitos-senha {
+  padding: 10px 14px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  border-left: 3px solid #dee2e6;
+}
+
+.requisitos-senha small {
+  margin-bottom: 3px;
+  transition: color 0.3s ease, font-weight 0.3s ease;
+}
+
+.requisitos-senha small i {
+  width: 18px;
+  margin-right: 6px;
+}
+
+.requisitos-senha small.text-success {
+  font-weight: 600;
+}
+
+/* ========== CORES ========== */
+.text-success {
+  color: #2ecc71 !important;
+}
+
+.text-muted {
+  color: #adb5bd !important;
+}
+
+/* ========== CURSOR ========== */
+.cursor-pointer {
+  cursor: pointer;
+  color: #f7971e;
+}
+
+.cursor-pointer:hover {
+  text-decoration: underline !important;
+}
+
+/* ========== BOTÃO WARNING ========== */
+.btn-warning {
+  background: linear-gradient(135deg, #f7971e 0%, #ffd200 100%);
+  border: none;
+  font-weight: 600;
+}
+
+.btn-warning:hover {
+  background: linear-gradient(135deg, #ffd200 0%, #f7971e 100%);
+  transform: scale(1.02);
+}

@@ -1,0 +1,32 @@
+<div class="container mt-4" *ngIf="album">
+  
+  <!-- BOTÃO VOLTAR -->
+  <div class="mb-3">
+    <button class="btn-voltar" (click)="voltar()">
+      <i class="fa fa-arrow-left"></i> Voltar
+    </button>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <img [src]="album.imagem" [alt]="album.nome" class="img-fluid rounded shadow">
+    </div>
+    <div class="col-md-8">
+      <h2>{{ album.nome }}</h2>
+      <h4 class="text-muted">{{ album.artista }}</h4>
+      <p><strong>Gênero:</strong> {{ album.genero }}</p>
+      <p><strong>Ano:</strong> {{ album.ano }}</p>
+      <p><strong>Preço:</strong> R$ {{ album.preco | number:'1.2-2' }}</p>
+      <p>{{ album.descricao }}</p>
+
+      <div class="mt-4">
+        <h5>📝 Faixas</h5>
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let faixa of album.faixas; let i = index">
+            {{ i + 1 }}. {{ faixa }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

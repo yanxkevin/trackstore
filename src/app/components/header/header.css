@@ -1,0 +1,18 @@
+/* ========== DROPDOWN ========== */
+.dropdown-item {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #f8f9fa;
+  padding-left: 25px;
+}
+
+.dropdown-item i {
+  width: 20px;
+}
+
+.dropdown-item.text-danger:hover {
+  background-color: #f8d7da;
+}

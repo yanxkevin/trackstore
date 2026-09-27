@@ -1,0 +1,81 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+      <div class="card shadow-lg border-0">
+        <div class="card-header bg-primary text-white text-center py-3">
+          <h3 class="mb-0"><i class="fa fa-user-circle"></i> Iniciar Sessão</h3>
+        </div>
+        
+        <div class="card-body p-4">
+          <!-- Mensagens de erro/sucesso -->
+          <div *ngIf="erroLogin" class="alert alert-danger">
+            <i class="fa fa-exclamation-circle"></i> {{ erroLogin }}
+          </div>
+          <div *ngIf="sucessoLogin" class="alert alert-success">
+            <i class="fa fa-check-circle"></i> {{ sucessoLogin }}
+          </div>
+
+          <!-- Formulário -->
+          <form #loginForm="ngForm" (ngSubmit)="fazerLogin()" autocomplete="off">
+            
+            <!-- Email -->
+            <div class="mb-3">
+              <label for="email" class="form-label fw-bold">
+                <i class="fa fa-envelope"></i> E-mail
+              </label>
+              <input 
+                type="email" 
+                class="form-control form-control-lg"
+                id="email"
+                [(ngModel)]="email"
+                name="email"
+                placeholder="seu@email.com"
+                autocomplete="off"
+                required
+              >
+            </div>
+
+            <!-- Senha -->
+            <div class="mb-3">
+              <label for="senha" class="form-label fw-bold">
+                <i class="fa fa-lock"></i> Senha
+              </label>
+              <input 
+                type="password" 
+                class="form-control form-control-lg"
+                id="senha"
+                [(ngModel)]="senha"
+                name="senha"
+                placeholder="Digite sua senha"
+                autocomplete="new-password"
+                required
+              >
+            </div>
+
+            <!-- Esqueci a senha -->
+            <div class="text-end mb-3">
+              <a (click)="irParaEsqueciSenha()" class="text-decoration-none cursor-pointer">
+                <i class="fa fa-key"></i> Esqueceu a senha?
+              </a>
+            </div>
+
+            <!-- Botão -->
+            <button type="submit" class="btn btn-primary btn-lg w-100">
+              <i class="fa fa-sign-in"></i> Iniciar Sessão
+            </button>
+          </form>
+
+          <!-- Link para cadastro -->
+          <div class="text-center mt-4">
+            <p class="mb-0">
+              Não possui uma conta? 
+              <a (click)="irParaCadastro()" class="text-primary fw-bold text-decoration-none cursor-pointer">
+                Criar uma conta
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
